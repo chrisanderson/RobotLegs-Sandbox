@@ -18,6 +18,9 @@ package com.liveswf.module.controller
 		override public function execute():void
 		{
 			trace(this + " execute() arguments: " + arguments + " shellDataSent: " + shellDataSent);//fix here
+			//see http://joelhooks.com/2010/02/14/robotlegs-as3-signals-and-the-signalcommandmap-example/
+			//arguments passed to signal should get injected into the command
+			
 			//shellDataSent.dispatch(moduleDataUpdated.arguments);
 			//shellDataSent.dispatch(arguments);
 		}
