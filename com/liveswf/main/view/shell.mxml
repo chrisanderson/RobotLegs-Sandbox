@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application
+	xmlns:fx="http://ns.adobe.com/mxml/2009"
+	xmlns:s="library://ns.adobe.com/flex/spark"
+	xmlns:main="com.liveswf.main.*"
+	xmlns:mainView="com.liveswf.main.view.components.*"
+	implements="com.liveswf.common.interfaces.IShell">
+	
+	<fx:Script>
+		<![CDATA[
+			import com.liveswf.common.interfaces.IDataArguments;
+			import com.liveswf.common.interfaces.IShell;
+			import com.liveswf.common.signals.ShellDataSentSignal;
+			
+			private var _shellDataSent:ShellDataSentSignal;
+			
+			public function sendShellData(arguments:IDataArguments):void
+			{
+				if(!_shellDataSent)
+				{
+					_shellDataSent = new ShellDataSentSignal();
+				}
+				
+				_shellDataSent.dispatch(arguments);
+			}
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<main:MainContext contextView="{this}" />
+	</fx:Declarations>
+	
+	<mainView:MainView id="mainView" />
+</s:Application>

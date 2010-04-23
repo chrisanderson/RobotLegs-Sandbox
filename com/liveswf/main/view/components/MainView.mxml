@@ -1,0 +1,151 @@
+﻿<?xml version="1.0"?>
+<s:Group
+	xmlns:fx="http://ns.adobe.com/mxml/2009"
+	xmlns:s="library://ns.adobe.com/flex/spark"
+	xmlns:mx="library://ns.adobe.com/flex/mx"
+	width="100%" height="100%"
+	creationComplete="_onCreationComplete(event);" enterFrame="_onEnterFrame(event);">
+
+	<fx:Script>
+		<![CDATA[
+			import com.liveswf.common.interfaces.IDataArguments;
+			import com.liveswf.common.signals.ModuleDataSentSignal;
+			import com.liveswf.main.model.vo.MainViewData;
+			import com.liveswf.main.model.vo.ModuleLoadData;
+			import com.liveswf.main.model.vo.ServerResponseData;
+			import com.liveswf.main.signals.MainViewUpdatedSignal;
+			import com.liveswf.main.signals.ModuleLoadRequestedSignal;
+			
+			import flash.display.DisplayObject;
+			import flash.events.Event;
+			
+			import mx.core.IVisualElement;
+			import mx.events.FlexEvent;
+			import mx.managers.IFocusManagerComponent;
+			
+			import org.osflash.signals.Signal;
+			
+			public var viewUpdated:MainViewUpdatedSignal = new MainViewUpdatedSignal();
+			public var moduleLoadRequested:ModuleLoadRequestedSignal = new ModuleLoadRequestedSignal();
+			public var moduleMethodTestRequested:ModuleDataSentSignal = new ModuleDataSentSignal();
+			
+			[Bindable]
+			private var _mainViewData:MainViewData = new MainViewData();
+			[Bindable]
+			private var _serverResponseData:ServerResponseData;
+			[Bindable]
+			private var _moduleLoadData:ModuleLoadData = new ModuleLoadData();
+			[Bindable]
+			private var _memoryUsage:Number;
+			
+			private function _onCreationComplete(event:FlexEvent):void
+			{
+			}
+			
+			private function _onEnterFrame(event:Event):void
+			{
+				_memoryUsage = Number(Number(System.totalMemory / 1024 / 1024).toFixed(2));
+			}
+			
+			public function get mainViewData():MainViewData
+			{
+				return _mainViewData;
+			}
+			
+			public function set serverResponseData(value:ServerResponseData):void
+			{
+				_serverResponseData = value;
+			}
+			
+			public function set moduleLoadData(value:ModuleLoadData):void
+			{
+				_moduleLoadData = value;
+				
+				if(_moduleLoadData.currentModuleData.view)
+				{
+					_addModuleView(_moduleLoadData.currentModuleData.view);
+				}
+			}
+			
+			private function _addModuleView(moduleView:DisplayObject):void
+			{
+				grpModuleContainer.addElement(moduleView as IVisualElement);
+				_moduleLoadData.currentModuleData.view = null;
+				
+				/*fix here try messing with the module using events instead of directly
+				if(tempModule is IModuleTest)
+				{
+					var tempApplication:IModuleTest = tempModule as IModuleTest;
+					tempApplication.moduleMethodTest("test33 from shell application");
+				}
+				else
+				{
+					throw new Error(this + " " + tempModule + " is NOT of type IModuleTest");
+				}
+				*/
+			}
+			
+			private function requestModuleLoad(loadModule:Boolean = true):void
+			{
+				if(loadModule == false && _moduleLoadData && _moduleLoadData.moduleLoadCount > 0)
+				{
+					grpModuleContainer.removeElementAt(0);
+				}
+				
+				var tempModuleLoadData:ModuleLoadData = _moduleLoadData ? _moduleLoadData : new ModuleLoadData();
+				tempModuleLoadData.loadModule = loadModule;
+				tempModuleLoadData.modulePath = "com/liveswf/module/view/module.swf";
+				moduleLoadRequested.dispatch(tempModuleLoadData);
+			}
+			
+			private function requestModuleMethodTest():void
+			{
+				var arguments:IDataArguments = new Object() as IDataArguments;
+				moduleMethodTestRequested.dispatch(arguments);
+			}
+		]]>
+	</fx:Script>
+	
+	<s:layout>
+		<s:VerticalLayout paddingTop="10" paddingLeft="10" paddingRight="10" paddingBottom="10" />
+	</s:layout>
+	<!--
+	<mx:Form>
+		<mx:FormItem label="Email:">
+			<s:TextInput id="tiEmail" text="@{_mainViewData.email}" />
+		</mx:FormItem>
+		
+		<mx:FormItem label="Password:">
+			<s:TextInput id="tiPassword" text="@{_mainViewData.password}" displayAsPassword="true" />
+		</mx:FormItem>
+	</mx:Form>
+	
+	<s:Button label="Submit" click="viewUpdated.dispatch(_mainViewData);" />
+	
+	<s:TextArea width="100%" height="100" text="{_serverResponseData.response}" />
+	-->
+	<s:Group>
+		<s:layout>
+			<s:HorizontalLayout />
+		</s:layout>
+		<s:Button label="Load Module" click="requestModuleLoad();" />
+		<s:Button label="Unload Module" click="requestModuleLoad(false);" />
+		<s:Button label="Force GC" click="System.gc();" />
+	</s:Group>
+	<s:Group>
+		<s:layout>
+			<s:HorizontalLayout />
+		</s:layout>
+		<s:Button label="Module Method Test" click="requestModuleMethodTest();" />
+	</s:Group>
+	
+	<mx:Label text="{'Memory: ' + _memoryUsage + ' Mb - Modules Loaded: ' + _moduleLoadData.moduleLoadCount}" />
+	
+	<s:Scroller width="100%" height="100%">
+		<s:Group id="grpModuleContainer" width="100%" height="100%">
+			<s:layout>
+				<s:VerticalLayout gap="4" />
+			</s:layout>
+		</s:Group>
+	</s:Scroller>
+</s:Group>
