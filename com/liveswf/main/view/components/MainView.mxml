@@ -71,7 +71,7 @@
 			{
 				grpModuleContainer.addElement(moduleView as IVisualElement);
 				_moduleLoadData.currentModuleData.view = null;
-				//fake comment delete this testing git commit test33
+				
 				/*fix here try messing with the module using events instead of directly
 				if(tempModule is IModuleTest)
 				{
