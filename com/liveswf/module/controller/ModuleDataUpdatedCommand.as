@@ -12,7 +12,7 @@ package com.liveswf.module.controller
 		public var shellDataSent:ShellDataSentSignal;
 		//[Inject]
 		//public var moduleDataUpdated:ModuleDataUpdatedSignal;
-		[Imject]
+		[Inject]
 		public var arguments:IDataArguments;
 		
 		override public function execute():void

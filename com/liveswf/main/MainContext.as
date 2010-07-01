@@ -24,7 +24,7 @@ package com.liveswf.main
 	public class MainContext extends SignalContext
 	{
 		override public function startup():void
-		{			
+		{
 			var startupSignal:ApplicationStartedSignal = new ApplicationStartedSignal();
 			signalCommandMap.mapSignal(startupSignal, SignalMapCommand, true);
 			signalCommandMap.mapSignal(startupSignal, PrepModelCommand, true);
