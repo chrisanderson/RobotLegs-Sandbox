@@ -1,6 +1,6 @@
 ﻿﻿package com.liveswf.module.controller
 {
-	import com.liveswf.common.signals.ModuleDataSentSignal;
+	//import com.liveswf.common.signals.ModuleDataSentSignal;
 	import com.liveswf.module.signals.ModuleViewSelectedSignal;
 	
 	import org.robotlegs.mvcs.Command;
@@ -21,7 +21,7 @@
 	{
 		override public function execute():void
 		{
-			injector.mapSingleton(ModuleDataSentSignal);
+			//injector.mapSingleton(ModuleDataSentSignal);//should be mapped in main's SignalMapCommand
 			injector.mapSingleton(ModuleViewSelectedSignal);
 		}
   }

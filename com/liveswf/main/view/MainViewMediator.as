@@ -3,8 +3,8 @@ package com.liveswf.main.view
 	import com.liveswf.common.interfaces.IDataArguments;
 	import com.liveswf.common.model.vo.dataArguments.ModuleReadyArguments;
 	import com.liveswf.common.model.vo.dataArguments.ModuleViewSelectedArguments;
+	import com.liveswf.common.signals.ModuleDataSentSignal;
 	import com.liveswf.common.signals.ShellDataSentSignal;
-	import com.liveswf.main.model.MainViewProxy;
 	import com.liveswf.main.model.vo.MainViewData;
 	import com.liveswf.main.model.vo.ModuleLoadData;
 	import com.liveswf.main.model.vo.ServerResponseData;

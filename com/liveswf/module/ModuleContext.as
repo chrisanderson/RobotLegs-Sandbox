@@ -5,6 +5,9 @@ package com.liveswf.module
 	import com.liveswf.module.controller.PrepViewCommand;
 	import com.liveswf.module.controller.SignalMapCommand;
 	
+	import flash.system.ApplicationDomain;
+	
+	import org.robotlegs.core.IInjector;
 	import org.robotlegs.mvcs.SignalContext;
 	
 	/**
@@ -32,9 +35,9 @@ package com.liveswf.module
 			super.startup();
 		}
 		
-		public function mapValue(whenAskedFor:Class, useValue:Object, named:String = ""):*
+		public function set parentInjector(value:IInjector):void
 		{
-			return injector.mapValue(whenAskedFor, useValue, named);
+			_injector = value.createChild(ApplicationDomain.currentDomain);
 		}
   }
 }

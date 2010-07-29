@@ -1,15 +1,12 @@
 ﻿<?xml version="1.0"?>
-<s:SkinnableContainer
-	xmlns:fx="http://ns.adobe.com/mxml/2009"
-	xmlns:s="library://ns.adobe.com/flex/spark"
-	xmlns:mx="library://ns.adobe.com/flex/mx"
-	width="100%" height="45"
-	skinClass="com.liveswf.module.view.components.skins.ModuleSkin"
+<mx:Canvas
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	width="100%" height="45" 
 	implements="com.liveswf.common.interfaces.IDisposable"
-	creationComplete="_onCreationComplete(event);" click="_onClick(event);" 
+	creationComplete="_onCreationComplete(event);" click="_onClick(event);"
 	buttonMode="true" useHandCursor="true">
 
-	<fx:Script>
+	<mx:Script>
 		<![CDATA[
 			import com.liveswf.common.interfaces.IDataArguments;
 			import com.liveswf.common.interfaces.IDisposable;
@@ -41,7 +38,7 @@
 			}
 			
 			public function dispose():void
-			{				
+			{
 				if(moduleViewSelected)
 				{
 					moduleViewSelected.removeAll();
@@ -63,12 +60,8 @@
 				trace(this + " moduleMethodTest() value: " + value);
 			}
 		]]>
-	</fx:Script>
+	</mx:Script>
 	
-	<s:layout>
-		<s:VerticalLayout paddingTop="10" paddingBottom="10" paddingRight="10" paddingLeft="10" />
-	</s:layout>
-	
-	<s:Label text="{'Module ' + _moduleId}" />
+	<mx:Label text="{'Module ' + _moduleId}" />
 	<mx:Image id="imageContainer" source="{_imageBitmapAsset}" width="100%" height="100%" scaleContent="false" />
-</s:SkinnableContainer>
+</mx:Canvas>

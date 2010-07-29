@@ -51,7 +51,7 @@ package com.liveswf.main.model
 		private var _moduleId:int;
 		
 		public function MainViewProxy()
-		{			
+		{
 			super();
 		}
 		
@@ -107,8 +107,6 @@ package com.liveswf.main.model
 			
 			var moduleView:IModule = moduleData.view as IModule;
 			moduleView.moduleId = moduleData.id;
-			moduleView.shellDataSent = shellDataSent;
-			moduleView.moduleDataSent = moduleDataSent;
 			
 			_moduleLoadData.currentModuleData = moduleData;
 			moduleLoadChanged.dispatch(_moduleLoadData);

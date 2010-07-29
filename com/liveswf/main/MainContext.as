@@ -1,8 +1,7 @@
 package com.liveswf.main
 {
-	import com.liveswf.main.controller.PrepModelCommand;
-	import com.liveswf.main.controller.PrepViewCommand;
-	import com.liveswf.main.controller.SignalMapCommand;
+	import com.liveswf.main.controller.*;
+	import com.liveswf.module.view.module;
 	import com.liveswf.common.signals.ApplicationStartedSignal;
 	
 	import flash.display.DisplayObjectContainer;
@@ -25,6 +24,9 @@ package com.liveswf.main
 	{
 		override public function startup():void
 		{
+			//map modules
+			viewMap.mapType(module);
+			
 			var startupSignal:ApplicationStartedSignal = new ApplicationStartedSignal();
 			signalCommandMap.mapSignal(startupSignal, SignalMapCommand, true);
 			signalCommandMap.mapSignal(startupSignal, PrepModelCommand, true);

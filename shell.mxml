@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:Application
-	xmlns:fx="http://ns.adobe.com/mxml/2009"
-	xmlns:s="library://ns.adobe.com/flex/spark"
-	xmlns:main="com.liveswf.main.*"
-	xmlns:mainView="com.liveswf.main.view.components.*"
-	implements="com.liveswf.common.interfaces.IShell">
+<mx:Application 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:main="com.liveswf.main.*" 
+	xmlns:mainView="com.liveswf.main.view.components.*" 
+	implements="com.liveswf.common.interfaces.IShell" 
+	layout="absolute">
 	
-	<fx:Script>
+	<mx:Script>
 		<![CDATA[
 			import com.liveswf.common.interfaces.IDataArguments;
 			import com.liveswf.common.interfaces.IShell;
@@ -24,12 +24,8 @@
 				_shellDataSent.dispatch(arguments);
 			}
 		]]>
-	</fx:Script>
+	</mx:Script>
 	
-	<fx:Declarations>
-		<!-- Place non-visual elements (e.g., services, value objects) here -->
-		<main:MainContext contextView="{this}" />
-	</fx:Declarations>
-	
+	<main:MainContext contextView="{this}" />
 	<mainView:MainView id="mainView" />
-</s:Application>
+</mx:Application>

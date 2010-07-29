@@ -1,12 +1,10 @@
 ﻿<?xml version="1.0"?>
-<s:Group
-	xmlns:fx="http://ns.adobe.com/mxml/2009"
-	xmlns:s="library://ns.adobe.com/flex/spark"
-	xmlns:mx="library://ns.adobe.com/flex/mx"
+<mx:VBox
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
 	width="100%" height="100%"
 	creationComplete="_onCreationComplete(event);" enterFrame="_onEnterFrame(event);">
 
-	<fx:Script>
+	<mx:Script>
 		<![CDATA[
 			import com.liveswf.common.interfaces.IDataArguments;
 			import com.liveswf.common.signals.ModuleDataSentSignal;
@@ -19,7 +17,6 @@
 			import flash.display.DisplayObject;
 			import flash.events.Event;
 			
-			import mx.core.IVisualElement;
 			import mx.events.FlexEvent;
 			import mx.managers.IFocusManagerComponent;
 			
@@ -69,7 +66,7 @@
 			
 			private function _addModuleView(moduleView:DisplayObject):void
 			{
-				grpModuleContainer.addElement(moduleView as IVisualElement);
+				vbModuleContainer.addChild(moduleView);
 				_moduleLoadData.currentModuleData.view = null;
 				
 				/*fix here try messing with the module using events instead of directly
@@ -89,7 +86,7 @@
 			{
 				if(loadModule == false && _moduleLoadData && _moduleLoadData.moduleLoadCount > 0)
 				{
-					grpModuleContainer.removeElementAt(0);
+					vbModuleContainer.removeChildAt(0);
 				}
 				
 				var tempModuleLoadData:ModuleLoadData = _moduleLoadData ? _moduleLoadData : new ModuleLoadData();
@@ -104,11 +101,8 @@
 				moduleMethodTestRequested.dispatch(arguments);
 			}
 		]]>
-	</fx:Script>
+	</mx:Script>
 	
-	<s:layout>
-		<s:VerticalLayout paddingTop="10" paddingLeft="10" paddingRight="10" paddingBottom="10" />
-	</s:layout>
 	<!--
 	<mx:Form>
 		<mx:FormItem label="Email:">
@@ -124,28 +118,18 @@
 	
 	<s:TextArea width="100%" height="100" text="{_serverResponseData.response}" />
 	-->
-	<s:Group>
-		<s:layout>
-			<s:HorizontalLayout />
-		</s:layout>
-		<s:Button label="Load Module" click="requestModuleLoad();" />
-		<s:Button label="Unload Module" click="requestModuleLoad(false);" />
-		<s:Button label="Force GC" click="System.gc();" />
-	</s:Group>
-	<s:Group>
-		<s:layout>
-			<s:HorizontalLayout />
-		</s:layout>
-		<s:Button label="Module Method Test" click="requestModuleMethodTest();" />
-	</s:Group>
+	
+	<mx:HBox>
+		<mx:Button label="Load Module" click="requestModuleLoad();" />
+		<mx:Button label="Unload Module" click="requestModuleLoad(false);" />
+		<mx:Button label="Force GC" click="System.gc();" />
+	</mx:HBox>
+	
+	<mx:HBox>
+		<mx:Button label="Module Method Test" click="requestModuleMethodTest();" />
+	</mx:HBox>
 	
 	<mx:Label text="{'Memory: ' + _memoryUsage + ' Mb - Modules Loaded: ' + _moduleLoadData.moduleLoadCount}" />
 	
-	<s:Scroller width="100%" height="100%">
-		<s:Group id="grpModuleContainer" width="100%" height="100%">
-			<s:layout>
-				<s:VerticalLayout gap="4" />
-			</s:layout>
-		</s:Group>
-	</s:Scroller>
-</s:Group>
+	<mx:VBox id="vbModuleContainer" width="100%" height="100%" />
+</mx:VBox>
