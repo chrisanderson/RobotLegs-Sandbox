@@ -1,6 +1,6 @@
 ﻿﻿package com.liveswf.module.controller
 {
-	//import com.liveswf.common.signals.ModuleDataSentSignal;
+	import com.liveswf.common.signals.ModuleDataSentSignal;
 	import com.liveswf.module.signals.ModuleViewSelectedSignal;
 	
 	import org.robotlegs.mvcs.Command;

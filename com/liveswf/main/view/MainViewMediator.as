@@ -51,6 +51,7 @@ package com.liveswf.main.view
 			//view signals
 			_mainView.viewUpdated.add(_onViewUpdated);
 			_mainView.moduleLoadRequested.add(_onModuleLoadRequested);
+			_mainView.moduleMethodTestRequested.add(_onModuleMethodTestRequested);
 			
 			//mediator signals
 			_serverResponded.add(_onServerResponded);
@@ -156,6 +157,13 @@ package com.liveswf.main.view
 		private function _onModuleLoadRequested(value:ModuleLoadData):void
 		{
 			_moduleLoadRequested.dispatch(value);
+		}
+		
+		[Inject]
+		public var test:ModuleDataSentSignal;//fix here temp code
+		private function _onModuleMethodTestRequested(value:IDataArguments):void
+		{
+			test.dispatch(value);
 		}
 		
 		private function _onModuleLoadChanged(value:ModuleLoadData):void
