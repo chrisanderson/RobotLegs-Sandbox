@@ -1,6 +1,7 @@
 package com.liveswf.module.view
 {
 	import com.liveswf.common.interfaces.IDataArguments;
+	import com.liveswf.common.model.vo.dataArguments.ModuleDataSentArguments;
 	import com.liveswf.common.model.vo.dataArguments.ModuleReadyArguments;
 	import com.liveswf.common.model.vo.dataArguments.ModuleViewSelectedArguments;
 	import com.liveswf.common.signals.ModuleDataSentSignal;
@@ -70,6 +71,11 @@ package com.liveswf.module.view
 			if(arguments is ModuleReadyArguments)
 			{
 				_moduleView.moduleId = (arguments as ModuleReadyArguments).moduleId;
+			}
+			
+			if(arguments is ModuleDataSentArguments)
+			{
+				trace("test33 message: " + (arguments as ModuleDataSentArguments).message);
 			}
 		}
 		

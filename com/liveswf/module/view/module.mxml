@@ -8,16 +8,19 @@
 	
 	<mx:Script>
 		<![CDATA[
+			import com.liveswf.common.interfaces.IModule;
+			import com.liveswf.common.signals.*;
+			import com.liveswf.module.ModuleContext;
+			
 			import org.robotlegs.mvcs.SignalContext;
 			import org.robotlegs.core.IInjector;
-			import com.liveswf.common.interfaces.IModule;
-			import com.liveswf.common.signals.ModuleDataSentSignal;
-			import com.liveswf.common.signals.ShellDataSentSignal;
 			
 			[Bindable]
 			private var _moduleId:int;
 			[Bindable]
 			private var _parentInjector:IInjector;
+			
+			private var _context:ModuleContext;
 			
 			public function get moduleId():int
 			{
@@ -32,12 +35,14 @@
 			public function set parentInjector(value:IInjector):void
 			{
 				_parentInjector = value;
+				
+				_context = new ModuleContext(this, true, value);
 			}
 			
 			public function dispose():void
 			{
+				_context.shutdown();
 				//fix here
-				//dispatch a signal to get module views to dispose
 				//dispose of signals in this class
 				//dispatch a signal to let shell know module dispose is complete
 				//have shell set the reference to shell here to null
@@ -45,6 +50,5 @@
 		]]>
 	</mx:Script>
 	
-	<module:ModuleContext id="moduleContext" contextView="{this}" parentInjector="{_parentInjector}" />
 	<moduleView:ModuleView id="moduleView" moduleId="{_moduleId}" />
 </mx:Module>

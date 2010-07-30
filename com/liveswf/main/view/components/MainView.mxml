@@ -6,6 +6,7 @@
 
 	<mx:Script>
 		<![CDATA[
+			import com.liveswf.common.model.vo.dataArguments.ModuleDataSentArguments;
 			import com.liveswf.common.interfaces.IDataArguments;
 			import com.liveswf.common.signals.ModuleDataSentSignal;
 			import com.liveswf.main.model.vo.MainViewData;
@@ -97,7 +98,8 @@
 			
 			private function requestModuleMethodTest():void
 			{
-				var arguments:IDataArguments = new Object() as IDataArguments;
+				var arguments:ModuleDataSentArguments = new ModuleDataSentArguments();
+				arguments.message = "hey bum";
 				moduleMethodTestRequested.dispatch(arguments);
 			}
 		]]>

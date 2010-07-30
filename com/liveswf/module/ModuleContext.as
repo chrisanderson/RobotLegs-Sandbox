@@ -1,10 +1,9 @@
 package com.liveswf.module
 {
 	import com.liveswf.common.signals.ApplicationStartedSignal;
-	import com.liveswf.module.controller.PrepModelCommand;
-	import com.liveswf.module.controller.PrepViewCommand;
-	import com.liveswf.module.controller.SignalMapCommand;
+	import com.liveswf.module.controller.*;
 	
+	import flash.display.DisplayObjectContainer;
 	import flash.system.ApplicationDomain;
 	
 	import org.robotlegs.core.IInjector;
@@ -24,6 +23,16 @@ package com.liveswf.module
 	
 	public class ModuleContext extends SignalContext
 	{
+		public function ModuleContext(contextView:DisplayObjectContainer = null, autoStartup:Boolean = true, parentInjector:IInjector = null, applicationDomain:ApplicationDomain = null)
+    {
+	    if(parentInjector)
+	    {
+    		_injector = parentInjector.createChild(applicationDomain || ApplicationDomain.currentDomain);
+	    }
+	    
+	    super(contextView, autoStartup);
+    }
+    
 		override public function startup():void
 		{
 			var applicationStarted:ApplicationStartedSignal = new ApplicationStartedSignal();
@@ -35,9 +44,9 @@ package com.liveswf.module
 			super.startup();
 		}
 		
-		public function set parentInjector(value:IInjector):void
+		override public function shutdown():void
 		{
-			_injector = value.createChild(ApplicationDomain.currentDomain);
+			//fix here
 		}
   }
 }

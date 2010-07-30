@@ -21,7 +21,6 @@
 	{
 		override public function execute():void
 		{
-			//injector.mapSingleton(ModuleDataSentSignal);//should be mapped in main's SignalMapCommand
 			injector.mapSingleton(ModuleViewSelectedSignal);
 		}
   }
