@@ -1,17 +1,10 @@
 package com.liveswf.main.view
 {
 	import com.liveswf.common.interfaces.IDataArguments;
-	import com.liveswf.common.model.vo.dataArguments.ModuleReadyArguments;
-	import com.liveswf.common.model.vo.dataArguments.ModuleViewSelectedArguments;
-	import com.liveswf.common.signals.ModuleDataSentSignal;
-	import com.liveswf.common.signals.ShellDataSentSignal;
-	import com.liveswf.main.model.vo.MainViewData;
-	import com.liveswf.main.model.vo.ModuleLoadData;
-	import com.liveswf.main.model.vo.ServerResponseData;
-	import com.liveswf.main.signals.MainViewUpdatedSignal;
-	import com.liveswf.main.signals.ModuleLoadChangedSignal;
-	import com.liveswf.main.signals.ModuleLoadRequestedSignal;
-	import com.liveswf.main.signals.ServerResponseSignal;
+	import com.liveswf.common.model.vo.dataArguments.*;
+	import com.liveswf.common.signals.*;
+	import com.liveswf.main.model.vo.*;
+	import com.liveswf.main.signals.*;
 	import com.liveswf.main.view.components.MainView;
 	
 	import flash.utils.describeType;

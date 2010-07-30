@@ -1,13 +1,10 @@
 package com.liveswf.module.view
 {
 	import com.liveswf.common.interfaces.IDataArguments;
-	import com.liveswf.common.model.vo.dataArguments.ModuleDataSentArguments;
-	import com.liveswf.common.model.vo.dataArguments.ModuleReadyArguments;
-	import com.liveswf.common.model.vo.dataArguments.ModuleViewSelectedArguments;
-	import com.liveswf.common.signals.ModuleDataSentSignal;
+	import com.liveswf.common.model.vo.dataArguments.*;
+	import com.liveswf.common.signals.*;
 	import com.liveswf.module.IModuleViewMediator;
-	import com.liveswf.module.signals.ModuleDataUpdatedSignal;
-	import com.liveswf.module.signals.ModuleViewSelectedSignal;
+	import com.liveswf.module.signals.*;
 	import com.liveswf.module.view.components.ModuleView;
 	
 	import org.robotlegs.mvcs.Mediator;
@@ -67,7 +64,6 @@ package com.liveswf.module.view
 		//inbound signal handlers
 		private function _onModuleDataSent(arguments:IDataArguments):void
 		{
-			trace("test33 arguments: " + arguments);//fix here
 			if(arguments is ModuleReadyArguments)
 			{
 				_moduleView.moduleId = (arguments as ModuleReadyArguments).moduleId;
